@@ -1,0 +1,28 @@
+//@import './variables.scss';
+
+.input-300{
+  width: 300px;
+}
+.input-anno{
+  margin-left: 20px;
+  font-size: $smallFs;
+  color: $grayFont;
+}
+.content-area{
+	padding-top: 20px;
+  padding-left: 20px;
+}
+.content{
+	padding-left: 20px;
+  margin-bottom: 30px;
+}
+.flex-layout{
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+.bd-manage{
+  width: 100% !important;
+  height: 100% !important;
+  padding: 20px 30px 30px 50px !important;
+}
