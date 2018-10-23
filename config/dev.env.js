@@ -1,5 +1,5 @@
 module.exports = {
   NODE_ENV: '"development"',
   ENV_CONFIG: '"dev"',
-  BASE_API: '"/agent"'
+  BASE_API: '"/4905"'
 }

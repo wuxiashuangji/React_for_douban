@@ -1,5 +1,5 @@
 import React from 'react' // 通过react来创建组件
-import HttpService from '../../utils/HttpService'
+import HttpService from '../../utils/jsonpHttp'
 // 引入progress  进度条
 
 export default class moviceList extends React.Component {

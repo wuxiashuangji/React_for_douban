@@ -1,15 +1,11 @@
 import axios from 'axios'
-// import { Message } from 'element-ui'
-import { Message, MessageBox } from 'element-ui'
-import store from '@/store'
-import { clearSession } from '../utils/savaSession'
+import { message as Message, Popconfirm as MessageBox } from 'antd'
 // import { getToken } from '@/utils/auth'
 // create an axios instance
 const service = axios.create({
   baseURL: process.env.BASE_API, // api 的 base_url
   timeout: 5000 // request timeout
 })
-
 // request interceptor
 service.interceptors.request.use(
   config => {
@@ -37,7 +33,6 @@ service.interceptors.response.use(
    */
   response => {
     const res = response.data
-    console.log(res, res.result !== 0, 'res.result !== 0')
     if (res.result !== 0) {
       Message({
         message: res.description,
@@ -47,7 +42,7 @@ service.interceptors.response.use(
       // 50008:非法的token; 50012:其他客户端登录了;  50014:Token 过期了;
       if (res.result === 401 || res.result === 402 || res.result === 403) {
         // 请自行在引入 MessageBox
-        // import { Message, MessageBox } from 'element-ui'
+        // todo 全局弹窗 使用store触发
         MessageBox.confirm(
           '你已被登出，可以取消继续留在该页面，或者重新登录',
           '确定登出',
@@ -57,10 +52,10 @@ service.interceptors.response.use(
             type: 'warning'
           }
         ).then(() => {
-          clearSession('addRoute')
-          store.dispatch('FedLogOut').then(() => {
-            location.reload() // 为了重新实例化vue-router对象 避免bug
-          })
+          // clearSession('addRoute')
+          // store.dispatch('FedLogOut').then(() => {
+          //   location.reload() // 为了重新实例化vue-router对象 避免bug
+          // })
         })
       }
       return Promise.reject('error')
@@ -79,4 +74,59 @@ service.interceptors.response.use(
   }
 )
 
-export default service
+// export default service
+
+class Http {
+  constructor() {
+    // 在这里, 它调用了父类的构造函数, 并将 lengths 提供给 Polygon 的"width"和"height"
+    // 注意: 在派生类中, 必须先调用 super() 才能使用 "this"。
+    // 忽略这个，将会导致一个引用错误。
+    this.request = service
+  }
+  get(url, query = {}, isLoading = true) {
+    return this.request({
+      url: url,
+      method: 'get',
+      params: query,
+      isLoading
+    })
+  }
+  post(url, data = {}, isLoading = true) {
+    return this.request({
+      url: url,
+      method: 'post',
+      data,
+      isLoading
+    })
+  }
+  put(url, data = {}, isLoading = true) {
+    return this.request({
+      url: url,
+      method: 'put',
+      data,
+      isLoading
+    })
+  }
+  patch(url, data = {}, isLoading = true) {
+    return this.request({
+      url: url,
+      method: 'PATCH',
+      data,
+      isLoading
+    })
+  }
+  delete(url, data = {}, isLoading = true) {
+    return this.request({
+      url: url,
+      method: 'DELETE',
+      data,
+      isLoading
+    })
+  }
+}
+// export default Http
+
+export {
+  service,
+  Http
+}

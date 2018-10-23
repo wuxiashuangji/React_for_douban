@@ -1,6 +1,6 @@
 import React from 'react' // 通过react来创建组件
-import $ from 'jquery'
 import { Spin, Alert, Card, Rate } from 'antd'
+import testApi from '@/api/test'
 // 引入progress  进度条
 import Npgress from '../common/progress.js'
 // 输出 class moviceList
@@ -12,37 +12,22 @@ export default class moviceList extends React.Component {
       isLoading: true
     }
   }
-
-  componentDidMount() {
+  async componentDidMount() {
     // 生命周期 组件挂载完成之后
-    this.getMovieData()
-  }
-
-  getMovieData() {
-    // 1.自己封装方法：
-    // HttpService.get_Data_By_fetchJsonp({url:''}).then(response=>{
-    //     console.log(response)
-    // })
-    // 2.使用jq方法：
-    const that = this
-
-    $.ajax({
-      url: 'https://api.douban.com/' + 'v2/movie/in_theaters',
-      type: 'get',
-      timeout: 10000, // 超时时间设置，单位毫秒,
-      success: function(res) {
-        console.log(res)
-
-        that.setState({
-          isLoading: false,
-          movieDate: res.subjects
-        })
-      },
-      error: function(err) {
-        console.log(err)
-      },
-      dataType: 'jsonp'
+    const moviceList = await testApi.getMoviceList()
+    this.setState({
+      movieDate: moviceList.data.list,
+      isLoading: false
     })
+  }
+  async componentWillUnmount() {
+    this.setState({
+      isLoading: false
+    })
+  }
+  clickhandler(props) {
+    // 点击事件
+    console.log(props, 'props')
   }
   render() {
     return (
@@ -52,52 +37,26 @@ export default class moviceList extends React.Component {
         <hr style={{ margin: '10 20' }} />
         {/* {console.log(this.state)}*/}
         {this.state.isLoading ? (
-          <Spin tip='Loading...'>
-            <Alert
-              message='正在加载中。。。。'
-              description='请稍后！'
-              type='info'
-            />
-          </Spin>
-        ) : (
-          ''
-        )}
+          <Spin tip='Loading...'> <Alert message='正在加载中。。。。' description='请稍后！' type='info'/> </Spin>) : ('')}
         <div
           className='moviceList'
           style={{ display: 'flex', flexWrap: 'wrap' }}
         >
           {this.state.movieDate.map((item, index) => {
             return (
-              <Card
-                title={item.title}
-                key={index}
-                extra={
-                  <a href='#' id={item.id}>
-                    More
-                  </a>
-                }
-                style={{ width: 300, margin: '10px' }}
-              >
+              <Card title={item.title} key={index} extra={<a href='#' id={item.id}> More </a>} style={{ width: 300, margin: '10px' }} onClick = {this.clickhandler.bind(this, { item, props: this.props })}>
                 <div className='custom-image'>
                   <img alt='example' width='100%' src={item.images.medium} />
                 </div>
                 <div className='custom-card'>
                   <h3> {item.original_title}</h3>
-                  <p>
-                    年份：
-                    {item.year}
-                  </p>
+                  <p>年份： {item.year} </p>
                   <p>
                     电影类型：
                     {item.genres.join(',')}
                   </p>
                   <span>
-                    <Rate
-                      disabled
-                      allowHalf
-                      defaultValue={0}
-                      value={Math.round(item.rating.average / 2)}
-                    />
+                    <Rate disabled allowHalf defaultValue={0} value={Math.round(item.rating.average / 2)}/>
                     {item.rating.average && (
                       <span className='ant-rate-text'>
                         {item.rating.average}{' '}
@@ -113,3 +72,4 @@ export default class moviceList extends React.Component {
     )
   }
 }
+

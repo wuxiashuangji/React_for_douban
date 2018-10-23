@@ -1,5 +1,4 @@
 import React from 'react' // 通过react来创建组件
-import $ from 'jquery'
 import { Spin, Alert, Card, Rate } from 'antd'
 // 引入progress  进度条
 import Npgress from '../common/progress.js'
@@ -24,23 +23,6 @@ export default class moviceList extends React.Component {
     //     console.log(response)
     // })
     // 2.使用jq方法：
-    const that = this
-    $.ajax({
-      url: 'https://api.douban.com/' + 'v2/movie/top250',
-      type: 'get',
-      timeout: 100000, // 超时时间设置，单位毫秒,
-      success: function(res) {
-        console.log(res)
-        that.setState({
-          isLoading: true,
-          movieDate: res.subjects
-        })
-      },
-      error: function(err) {
-        console.log(err)
-      },
-      dataType: 'jsonp'
-    })
   }
   render() {
     return (

@@ -10,19 +10,19 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/agent': {
-        target: 'https://dag.leyaoyao.com',
+      '/4905/': {
+        target: 'http://yapi.demo.qunar.com/mock/',
         // target: 'http://192.168.20.62:8041',
         // target: 'http:// jpeb74.natappfree.cc',
         changeOrigin: true, //开启代理
         // pathRewrite: {'^/agent': '/agent'}  //这里重写路径/run就代理到对应地址
         // secure: false,
-        // // pathRewrite: {
-        // //   '^/devApi': 'https://dag.leyaoyao.com/agent'
-        // // },
+        //  pathRewrite: {
+        //    '^/4905': 'https://dag.leyaoyao.com/agent'
+        //  },
         // rewrite: function(req) {
         //   console.log(req.url)
-        //   req.url = req.url.replace(/^\/agent/, '')
+        //   req.url = req.url.replace(/^\/4905/, '')
         // }
       }
     },

@@ -1,6 +1,5 @@
 import React from 'react' // 通过react来创建组件
-import $ from 'jquery'
-import { Spin, Alert, Card, Rate } from 'antd'
+import { Alert, Card, Rate, Spin } from 'antd'
 // 引入progress  进度条
 import Npgress from '../common/progress.js'
 
@@ -15,40 +14,14 @@ export default class moviceList extends React.Component {
   }
 
   componentDidMount() {
-    this.getMovieData()
   }
 
-  getMovieData() {
-    // 1.自己封装方法：
-    // HttpService.get_Data_By_fetchJsonp({url:''}).then(response=>{
-    //     console.log(response)
-    // })
-    // 2.使用jq方法：
-    const that = this
-    $.ajax({
-      url: 'https://api.douban.com/' + 'v2/movie/coming_soon',
-      type: 'get',
-      timeout: 100000, // 超时时间设置，单位毫秒,
-      success: function(res) {
-        console.log(res)
-
-        that.setState({
-          isLoading: false,
-          movieDate: res.subjects
-        })
-      },
-      error: function(err) {
-        console.log(err)
-      },
-      dataType: 'jsonp'
-    })
-  }
   render() {
     return (
       <div>
-        <Npgress />
+        <Npgress/>
         <h3 style={{ padding: 10, margin: 10 }}>即将上映电影</h3>
-        <hr style={{ margin: '10 20' }} />
+        <hr style={{ margin: '10 20' }}/>
         {this.state.isLoading ? (
           <Spin tip='Loading...'>
             <Alert
@@ -78,7 +51,7 @@ export default class moviceList extends React.Component {
                 style={{ width: 300, margin: '10px' }}
               >
                 <div className='custom-image'>
-                  <img alt='example' width='100%' src={item.images.medium} />
+                  <img alt='example' width='100%' src={item.images.medium}/>
                 </div>
                 <div className='custom-card'>
                   <h3> {item.original_title}</h3>

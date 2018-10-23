@@ -1,6 +1,6 @@
 import React from 'react' // 通过react来创建组件
-import HttpService from '../../utils/HttpService'
-import $ from 'jquery'
+import HttpService from '../../utils/jsonpHttp'
+
 export default class moviceList extends React.Component {
   constructor(props) {
     super(props)
