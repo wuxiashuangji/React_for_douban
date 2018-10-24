@@ -1,5 +1,8 @@
-import { Table, Button } from 'antd'
 import React from 'react'
+import { Table, Button } from 'antd'
+
+import Npgress from '@/views/common/progress'
+
 const columns = [
   {
     title: 'Name',
@@ -53,6 +56,7 @@ export default class Tab extends React.Component {
     const hasSelected = selectedRowKeys.length > 0
     return (
       <div style= {{ padding: '40px 50px', border: '1px solid black' }}>
+        <Npgress/>
         <div style={{ marginBottom: 16 }}>
           <Button
             type='primary'

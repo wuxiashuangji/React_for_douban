@@ -1,5 +1,4 @@
 import React from 'react' // 通过react来创建组件
-import { Alert, Card, Rate, Spin } from 'antd'
 // 引入progress  进度条
 import Npgress from '../common/progress.js'
 
@@ -22,64 +21,9 @@ export default class moviceList extends React.Component {
         <Npgress/>
         <h3 style={{ padding: 10, margin: 10 }}>即将上映电影</h3>
         <hr style={{ margin: '10 20' }}/>
-        {this.state.isLoading ? (
-          <Spin tip='Loading...'>
-            <Alert
-              message='正在加载中。。。。'
-              description='请稍后！'
-              type='info'
-            />
-          </Spin>
-        ) : (
-          ''
-        )}
         {/* {console.log(this.state)}*/}
-        <div
-          className='moviceList'
-          style={{ display: 'flex', flexWrap: 'wrap' }}
-        >
-          {this.state.movieDate.map((item, index) => {
-            return (
-              <Card
-                title={item.title}
-                key={index}
-                extra={
-                  <a href='#' id={item.id}>
-                    More
-                  </a>
-                }
-                style={{ width: 300, margin: '10px' }}
-              >
-                <div className='custom-image'>
-                  <img alt='example' width='100%' src={item.images.medium}/>
-                </div>
-                <div className='custom-card'>
-                  <h3> {item.original_title}</h3>
-                  <p>
-                    年份：
-                    {item.year}
-                  </p>
-                  <p>
-                    电影类型：
-                    {item.genres.join(',')}
-                  </p>
-                  <span>
-                    <Rate
-                      disabled
-                      allowHalf
-                      defaultValue={0}
-                      value={Math.round(item.rating.average / 2)}
-                    />
-                    {item.rating.average && (
-                      <span className='ant-rate-text'>
-                        {item.rating.average}{' '}
-                      </span>
-                    )}
-                  </span>
-                </div>
-              </Card>
-            )
-          })}
+        <div className='moviceList' style={{ display: 'flex', flexWrap: 'wrap' }}>
+          即将上映电影
         </div>
       </div>
     )

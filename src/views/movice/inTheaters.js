@@ -12,6 +12,11 @@ export default class moviceList extends React.Component {
       isLoading: true
     }
   }
+  async componentWillMount() {
+    this.setState({
+      isLoading: true
+    })
+  }
   async componentDidMount() {
     // 生命周期 组件挂载完成之后
     const moviceList = await testApi.getMoviceList()
@@ -20,10 +25,10 @@ export default class moviceList extends React.Component {
       isLoading: false
     })
   }
-  async componentWillUnmount() {
-    this.setState({
-      isLoading: false
-    })
+  componentWillUnmount() {
+    this.setState = (state, callback) => {
+      return;
+    }
   }
   clickhandler(props) {
     // 点击事件

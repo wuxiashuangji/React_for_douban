@@ -1,5 +1,7 @@
-import NProgress from 'nprogress'
 import React from 'react'
+
+import NProgress from 'nprogress'
+
 // 引入nprogress的css
 import 'nprogress/nprogress.css'
 

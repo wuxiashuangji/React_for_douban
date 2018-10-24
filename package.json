@@ -17,11 +17,8 @@
     ]
   },
   "keywords": [
-    "vue",
-    "element-ui",
-    "admin",
-    "management-system",
-    "admin-template"
+    "react-cli",
+    "vue-react"
   ],
   "repository": {
     "type": "git",
