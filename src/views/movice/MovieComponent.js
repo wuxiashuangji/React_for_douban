@@ -7,12 +7,43 @@ import {
   Route,
   Link
 } from 'react-router-dom'
-
-import inTheaters from './inTheaters.js'
-import comingSoon from './comingSoon.js'
-import top250 from './top250.js'
+import RequireComponent from '@/utils/require'
 
 export default class MovieComponent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      componentList: [], // 组件数据
+      isLoading: false
+    }
+  }
+  componentDidMount() {
+    // 测试延迟加载组件问题
+    setTimeout(() => {
+      this.setState({
+        componentList: [
+          {
+            id: 1,
+            path: '/movie/inTheaters',
+            component: '/movice/inTheaters',
+            hidden: false
+          },
+          {
+            id: 2,
+            path: '/movie/comingSoon',
+            component: '/movice/comingSoon',
+            hidden: false
+          },
+          {
+            id: 3,
+            path: '/movie/top250',
+            component: '/movice/top250',
+            hidden: false
+          }
+        ]
+      })
+    }, 1000)
+  }
   render() {
     return (
       <Layout style={{ height: '100%' }}>
@@ -31,9 +62,12 @@ export default class MovieComponent extends React.Component {
         <Layout style={{ padding: '0 24px 24px' }}>
           <Content style={{ background: '#fff', padding: ' 24px  24px 0 24px', margin: 0, minHeight: 280 }}>
             {/* path为相对根路径 ，path=‘/movie/inTheaters’ 相当于匹配的是localhost+/movie/inTheaters*/}
-            <Route path='/movie/inTheaters' component={inTheaters}></Route>
-            <Route path='/movie/comingSoon' component={comingSoon}></Route>
-            <Route path='/movie/top250' component={top250}></Route>
+            {/* todo 动态加载组件 */}
+            {
+              this.state.componentList.map((item, index) => {
+                return <Route path={item.path} key = { index } {...this.props} component={RequireComponent(item.component)}></Route>
+              })
+            }
           </Content>
         </Layout>
       </Layout>

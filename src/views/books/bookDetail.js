@@ -1,5 +1,5 @@
 import React from 'react' // 通过react来创建组件
-import HttpService from '@/utils/HttpService'
+
 export default class moviceList extends React.Component {
   constructor(props) {
     super(props)
@@ -7,12 +7,6 @@ export default class moviceList extends React.Component {
       movieDate: {}, // 电影数据
       isLoading: false
     }
-  }
-
-  getMovieData() {
-    HttpService.get_Data_By_fetchJsonp({ url: '' }).then(response => {
-      console.log(response)
-    })
   }
   render() {
     return (

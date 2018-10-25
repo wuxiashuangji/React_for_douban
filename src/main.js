@@ -52,11 +52,11 @@ class Main extends React.Component {
                 <Route path='/home' component={HomeComponent}></Route>
                 <Route path='/tab' component={Tab}></Route>
                 <Route path='/movie' component={MovieComponent}></Route>
+
                 <Route path='/about' component={AboutComponent}></Route>
                 <Route path='/register' component={Register}></Route>
                 <Route path='/login' component={Login}></Route>
               </Switch>
-
             </div>
           </Content>
           <Footer style={{ textAlign: 'center' }}>

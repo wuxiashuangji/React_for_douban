@@ -12,7 +12,8 @@ module.exports = {
   globals:{
     'tinymce':true,
     '$':true,
-    'jQuery':true
+    'jQuery':true,
+    'React':true
   },
   extends: ['plugin:vue/recommended', 'eslint:recommended'],
 

@@ -5,6 +5,7 @@ export default class AboutMe extends React.Component {
   render() {
     return (
       <Layout>
+        {console.log(this.props, '======')}
         <h3 style={{ lineHeight: '60px', color: 'grey', textAlign: 'center', fontWeight: 'bolder', fontSize: '26px' }}>关于Me</h3>
         <Divider />
         <Card

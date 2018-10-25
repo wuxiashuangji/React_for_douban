@@ -103,6 +103,7 @@ const webpackConfig = merge(baseWebpackConfig, {
   optimization: {
     splitChunks: {
       chunks: 'all',
+      minSize: 0,
       cacheGroups: {
         libs: {
           name: 'chunk-libs',
@@ -110,20 +111,35 @@ const webpackConfig = merge(baseWebpackConfig, {
           priority: 10,
           chunks: 'initial' // 只打包初始时依赖的第三方
         },
-        elementUI: {
-          name: 'chunk-elementUI', // 单独将 elementUI 拆包
+        react: {
+          name: 'chunk-react', // 单独将 react 拆包
+          chunks: "initial",
+          minSize: 0,
+          minChunks: 1,
+          enforce: true,
           priority: 20, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
-          test: /[\\/]node_modules[\\/]element-ui[\\/]/
+          test: /[\\/]node_modules[\\/]react|react\-dom|react\-router\-dom/,
+          reuseExistingChunk: true
         },
-        commons: {
-          name: 'chunk-commons',
-          test: resolve('src/components'), // 可自定义拓展你的规则
-          minChunks: 3, // 最小公用次数
-          priority: 5,
+        antd: {
+          name: 'chunk-antd',
+          chunks: "all",
+          test: /antd/,
+          enforce: true,
+          priority: 30, // 权重要大于 libs 和 app 不然会被打包进 libs 或者 app
+          reuseExistingChunk: true
+        },
+        views: {
+          name: 'chunk-views',
+          chunks: "initial",
+          test: resolve('src/views'), // 可自定义拓展你的规则
+          priority: 30,
+          enforce: true,
           reuseExistingChunk: true
         }
       }
     },
+    occurrenceOrder: true,
     runtimeChunk: 'single',
     minimizer: [
       new UglifyJsPlugin({

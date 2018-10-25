@@ -24,6 +24,9 @@ export default class moviceList extends React.Component {
         {/* {console.log(this.state)}*/}
         <div className='moviceList' style={{ display: 'flex', flexWrap: 'wrap' }}>
           即将上映电影
+          {
+            console.log(this.props, '即将上映电影:props')
+          }
         </div>
       </div>
     )

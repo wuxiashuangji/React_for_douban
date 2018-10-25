@@ -27,7 +27,6 @@ export default class AboutComponent extends React.Component {
       <Router>
         <Layout >
           <Npgress/>
-          {console.log(this.props, '======')}
           <Sider style = {{ backgroundColor: 'white' }}>
             <Menu
               theme='light'
@@ -36,18 +35,21 @@ export default class AboutComponent extends React.Component {
               style={{ lineHeight: '64px' }}
             >
               <Menu.Item key='1'><Link to={{
-                pathname: '/about/aboutMe',
+                pathname: '/about/aboutMe/1555',
                 search: 'id=1212&name=zorl',
-                hash: '#20181024',
+                params: {
+                  name: 'zorl',
+                  age: 80
+                },
+                // hash: '#20181024',
                 state: { statue: 100 }
-
               }}>关于我</Link></Menu.Item>
               <Menu.Item key='2'><Link to='/about/aboutProject'>关于项目</Link></Menu.Item>
             </Menu>
           </Sider>
           <Content>
             <Switch>
-              <Route path='/about/aboutMe' exact component={AboutMe} />
+              <Route path='/about/aboutMe/:id' exact component={AboutMe} ></Route>
               <Route path='/about/aboutProject' exact component={AboutProject} />
             </Switch>
           </Content>

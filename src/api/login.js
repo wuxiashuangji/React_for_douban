@@ -1,5 +1,4 @@
 import request from '@/utils/request'
-import { clearSession } from '@/utils/savaSession'
 export function loginByUsername(username, password, verifyCode) {
   const data = {
     username: username,
@@ -18,7 +17,6 @@ export function logout() {
     url: '/rest/logout',
     method: 'post'
   }).then(res => {
-    clearSession('addRoute')
   })
 }
 
