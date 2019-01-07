@@ -1,6 +1,6 @@
 import { Layout, Table, Icon } from 'antd'
 import React from 'react'
-
+import ScrollToTop from './../common/scrollToTop'
 // 操作更多的下拉菜单开始
 import { Menu, Dropdown, Checkbox } from 'antd'
 
@@ -74,6 +74,8 @@ export default class TableList extends React.Component {
       }]
     return (
       <Layout>
+        <h4>表格====</h4>
+        <ScrollToTop className='scrollToTop' />
         <Table columns={columns} dataSource={data} style={{ marginTop: 20, padding: 5, backgroound: '#0094ff' }}/>
       </Layout>
 

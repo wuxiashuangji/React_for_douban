@@ -10,15 +10,14 @@ const { Content, Sider } = Layout;
 
 import AboutMe from './aboutMe.js'
 import AboutProject from './aboutProject'
-import About from './aboutComponent'
 
-console.log(About, '-- About --')
 console.log(Redirect, '-- Redirect --')
 export default class AboutComponent extends React.Component {
-  state = {
-    loading: true
+  construtor(props) {
+    this.state = {
+      loading: true
+    }
   }
-
   onChange = (checked) => {
   }
 

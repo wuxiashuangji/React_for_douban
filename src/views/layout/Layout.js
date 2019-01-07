@@ -5,7 +5,6 @@ import { Layout, Divider, Carousel } from 'antd'
 
 export default class HomeComponent extends React.Component {
   onCollapse = (collapsed) => {
-    console.log(collapsed)
     this.setState({
       collapsed,
       mode: collapsed ? 'vertical' : 'inline'
